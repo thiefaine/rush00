@@ -17,8 +17,6 @@ public class character : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		animLegs  = this.foot.GetComponent<Animator>();
-		rb = this.GetComponent<Rigidbody2D>();
 	}
 
 
