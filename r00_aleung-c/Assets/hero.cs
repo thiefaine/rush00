@@ -4,6 +4,8 @@ using System.Collections;
 public class hero : character {
 
 	public Camera	cam;
+	//[HideInInspector]
+	public GameObject room_obj;
 
 	// Use this for initialization
 	void Start () {
