@@ -55,9 +55,12 @@
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_OSX
+'Assets/script/BackgroundFadeManager.cs'
+'Assets/script/backgroundmanager.cs'
 'Assets/script/bullet.cs'
 'Assets/script/character.cs'
 'Assets/script/cricket.cs'
+'Assets/script/guiscript.cs'
 'Assets/script/hero.cs'
 'Assets/script/saber.cs'
 'Assets/script/sniper.cs'

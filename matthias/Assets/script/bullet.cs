@@ -4,7 +4,8 @@ using System.Collections;
 public class bullet : MonoBehaviour {
 
 	public Rigidbody2D	rb;
-	public float		speed = 30f;
+	private float		speed = 20f;
+	public bool			isShot = false;
 
 	// Use this for initialization
 	void Start () {
@@ -15,5 +16,20 @@ public class bullet : MonoBehaviour {
 	void Update () {
 	
 	}
-	
+
+	void OnTriggerStay2D(Collider2D col)
+	{
+		if (col.gameObject.tag != "weapon" && isShot)
+		{
+			Debug.Log("collision with : " + col.gameObject);
+			Debug.Log("collision with name : " + col.gameObject.name);
+			GameObject.Destroy(this.gameObject);
+		}
+	}
+
+	public float getSpeed()
+	{
+		return speed;
+	}
+
 }

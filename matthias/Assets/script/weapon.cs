@@ -15,6 +15,9 @@ public class weapon : MonoBehaviour {
 
 	public bool					isWhiteWeapon;
 
+	public AudioSource			weaponShoot;
+	public AudioSource			noAmmo;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -28,32 +31,41 @@ public class weapon : MonoBehaviour {
 	}
 
 	public void shoot() {
+		if (nbAmos <= 0 && !isWhiteWeapon)
+		{
+			noAmmo.Play();
+		}
 		if (nbAmos > 0 && canShoot)
 		{
 			nbAmos -= 1;
+			weaponShoot.Play();
 
 			StartCoroutine(canShootCoroutine());
 			GameObject b = (GameObject)Instantiate(bullet.gameObject, new Vector2(transform.position.x, transform.position.y + 0.5f), bullet.gameObject.transform.localRotation);
 
+			b.GetComponent<bullet>().isShot = true;
 			b.GetComponent<bullet>().transform.parent = gameObject.transform;
 			
 			b.GetComponent<bullet>().transform.position = transform.position;
 			b.GetComponent<bullet>().transform.localRotation = Quaternion.Euler(0, 0, -90);
-			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x + 0.1f, b.GetComponent<bullet>().transform.localPosition.y - 0.4f);
+			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x, b.GetComponent<bullet>().transform.localPosition.y - 0.4f);
 			b.GetComponent<bullet>().transform.localScale = new Vector3 (1f, 1f, 1f);
 			b.GetComponent<bullet>().transform.parent = null;
 
 			StartCoroutine(goBullet(b));
-		} else if (nbAmos == -1 && canShoot)
+		} else if (isWhiteWeapon && canShoot)
 		{
+			weaponShoot.Play();
+
 			StartCoroutine(canShootCoroutine());
 			GameObject b = (GameObject)Instantiate(bullet.gameObject, transform.position, bullet.gameObject.transform.localRotation);
 
+			b.GetComponent<bullet>().isShot = true;
 			b.GetComponent<bullet>().transform.parent = gameObject.transform;
 			
 			b.GetComponent<bullet>().transform.position = transform.position;
 			b.GetComponent<bullet>().transform.localRotation = Quaternion.Euler(0, 0, -90);
-			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x + 0.1f, b.GetComponent<bullet>().transform.localPosition.y - 0.4f);
+			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x, b.GetComponent<bullet>().transform.localPosition.y - 0.4f);
 			b.GetComponent<bullet>().transform.localScale = new Vector3 (1f, 1f, 1f);
 			b.GetComponent<bullet>().transform.parent = null;
 
@@ -74,7 +86,7 @@ public class weapon : MonoBehaviour {
 	{
 		Rigidbody2D r = b.GetComponent<Rigidbody2D>();
 		b.GetComponent<SpriteRenderer>().enabled = true;
-		r.AddForce(-transform.up * b.GetComponent<bullet>().speed, ForceMode2D.Impulse);
+		r.AddForce(-transform.up * b.GetComponent<bullet>().getSpeed(), ForceMode2D.Impulse);
 		yield return new WaitForSeconds(2.0f);
 		GameObject.Destroy(b);
 	}
@@ -84,5 +96,10 @@ public class weapon : MonoBehaviour {
 		canShoot = false;
 		yield return new WaitForSeconds(fireRate);
 		canShoot = true;
+	}
+
+	public int getNbAmmos()
+	{
+		return nbAmos;
 	}
 }

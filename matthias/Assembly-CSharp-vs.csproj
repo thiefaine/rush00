@@ -46,9 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\script\BackgroundFadeManager.cs" />
+     <Compile Include="Assets\script\backgroundmanager.cs" />
      <Compile Include="Assets\script\bullet.cs" />
      <Compile Include="Assets\script\character.cs" />
      <Compile Include="Assets\script\cricket.cs" />
+     <Compile Include="Assets\script\guiscript.cs" />
      <Compile Include="Assets\script\hero.cs" />
      <Compile Include="Assets\script\saber.cs" />
      <Compile Include="Assets\script\sniper.cs" />
