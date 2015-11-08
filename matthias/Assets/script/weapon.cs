@@ -6,12 +6,12 @@ public class weapon : MonoBehaviour {
 
 	public GameObject			spriteInHand;
 	public GameObject			bullet;
-	protected float				fireRate;
+	public float				fireRate;
 	protected int				nbAmos;
 	protected int				speedDrop = 10;
 	public Rigidbody2D			rb;
 	private List<GameObject> 	listBullet;
-	private bool				canShoot = true;
+	public bool				canShoot = true;
 
 	public bool					isWhiteWeapon;
 
@@ -24,6 +24,10 @@ public class weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+	}
+
+	public void set_ammos(int i) {
+		nbAmos = i;
 	}
 
 	public void slide() {
@@ -48,7 +52,7 @@ public class weapon : MonoBehaviour {
 			
 			b.GetComponent<bullet>().transform.position = transform.position;
 			b.GetComponent<bullet>().transform.localRotation = Quaternion.Euler(0, 0, -90);
-			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x, b.GetComponent<bullet>().transform.localPosition.y - 0.4f);
+			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x, b.GetComponent<bullet>().transform.localPosition.y - 0.1f);
 			b.GetComponent<bullet>().transform.localScale = new Vector3 (1f, 1f, 1f);
 			b.GetComponent<bullet>().transform.parent = null;
 
@@ -65,7 +69,7 @@ public class weapon : MonoBehaviour {
 			
 			b.GetComponent<bullet>().transform.position = transform.position;
 			b.GetComponent<bullet>().transform.localRotation = Quaternion.Euler(0, 0, -90);
-			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x, b.GetComponent<bullet>().transform.localPosition.y - 0.4f);
+			b.GetComponent<bullet>().transform.localPosition = new Vector2(b.GetComponent<bullet>().transform.localPosition.x, b.GetComponent<bullet>().transform.localPosition.y - 0.1f);
 			b.GetComponent<bullet>().transform.localScale = new Vector3 (1f, 1f, 1f);
 			b.GetComponent<bullet>().transform.parent = null;
 
@@ -86,7 +90,8 @@ public class weapon : MonoBehaviour {
 	{
 		Rigidbody2D r = b.GetComponent<Rigidbody2D>();
 		b.GetComponent<SpriteRenderer>().enabled = true;
-		r.AddForce(-transform.up * b.GetComponent<bullet>().getSpeed(), ForceMode2D.Impulse);
+//		r.AddForce(-transform.up * b.GetComponent<bullet>().getSpeed(), ForceMode2D.Impulse);
+		r.velocity = (-transform.up * b.GetComponent<bullet> ().getSpeed ());
 		yield return new WaitForSeconds(2.0f);
 		GameObject.Destroy(b);
 	}

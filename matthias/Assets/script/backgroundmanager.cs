@@ -23,7 +23,7 @@ public class backgroundmanager : MonoBehaviour
 		{
 			timer = 0.0f;
 			index += 1;
-			if (index > listColor.Length - 1)
+			if (index > listColor.Length - 2)
 				index = 0;
 		}
 	}

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{9A4FAF9C-1318-64B8-6E23-05E79FCE53CF}</ProjectGuid>
+	<ProjectGuid>{7CB208A8-57A4-51C0-3366-53FA055E536D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,15 +46,21 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\script\BackgroundFadeManager.cs" />
      <Compile Include="Assets\script\backgroundmanager.cs" />
      <Compile Include="Assets\script\bullet.cs" />
      <Compile Include="Assets\script\character.cs" />
      <Compile Include="Assets\script\cricket.cs" />
+     <Compile Include="Assets\script\enemy\EnemyManager.cs" />
+     <Compile Include="Assets\script\enemy\enemy.cs" />
      <Compile Include="Assets\script\guiscript.cs" />
      <Compile Include="Assets\script\hero.cs" />
+     <Compile Include="Assets\script\room\RoomManager.cs" />
+     <Compile Include="Assets\script\room\room.cs" />
      <Compile Include="Assets\script\saber.cs" />
      <Compile Include="Assets\script\sniper.cs" />
+     <Compile Include="Assets\script\sound_collision.cs" />
      <Compile Include="Assets\script\submachine.cs" />
      <Compile Include="Assets\script\weapon.cs" />
      <None Include="Assets\Fonts\friday13\Font License.txt" />

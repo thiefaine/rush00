@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class hero : character {
 
@@ -10,6 +11,9 @@ public class hero : character {
 	public AudioSource takeWeapon;
 	public AudioSource dropWeapon;
 	public AudioSource noAmmoShoot;
+
+	public GameObject room_obj;
+	public GameObject Enemy_manager;
 
 	// Use this for initialization
 	void Start () {
@@ -62,10 +66,23 @@ public class hero : character {
 				pickup = false;
 			if (Input.GetMouseButton(1) && currentWeapon != null)
 				releaseWeapon();
-			if (Input.GetMouseButton(0) && currentWeapon != null && !currentWeapon.GetComponent<weapon>().isWhiteWeapon) // fire weapon
+			if (Input.GetMouseButton(0) && currentWeapon != null && !currentWeapon.GetComponent<weapon>().isWhiteWeapon) { // fire weapon
 				currentWeapon.GetComponent<weapon>().shoot();
+				make_sound();
+			}
 			if (Input.GetMouseButtonDown(0) && currentWeapon != null && currentWeapon.GetComponent<weapon>().isWhiteWeapon) // white weapon
 				currentWeapon.GetComponent<weapon>().shoot();
+		}
+	}
+
+	public void make_sound () {
+		CircleCollider2D circle_sound = transform.Find("son").GetComponent<CircleCollider2D> ();
+		List <enemy> enemy_list = Enemy_manager.GetComponent<EnemyManager> ().get_current_list ();
+
+		foreach (enemy enemy in enemy_list) {
+			if (circle_sound.bounds.Contains(enemy.transform.position)) {
+				enemy.set_alert();
+			}
 		}
 	}
 
@@ -91,6 +108,10 @@ public class hero : character {
 	}
 
 	void OnTriggerStay2D(Collider2D col) {
+		if (col.gameObject.layer == 15 ) { // si collider est sur le layer enemy bullet
+			isAlive = false;
+		}
+
 		if (col.tag == "weapon" && pickup && currentWeapon == null) {
 			takeWeapon.Play();
 			currentWeapon = col.gameObject;
@@ -102,7 +123,7 @@ public class hero : character {
 
 			currentWeapon.GetComponent<weapon>().transform.position = transform.position;
 			currentWeapon.GetComponent<weapon>().transform.localRotation = Quaternion.identity;
-			currentWeapon.GetComponent<weapon>().transform.localPosition = new Vector2(currentWeapon.GetComponent<weapon>().spriteInHand.transform.localPosition.x + 0.1f, currentWeapon.GetComponent<weapon>().spriteInHand.transform.localPosition.y - 0.4f);
+			currentWeapon.GetComponent<weapon>().transform.localPosition = new Vector2(currentWeapon.GetComponent<weapon>().spriteInHand.transform.localPosition.x + 0.1f, currentWeapon.GetComponent<weapon>().spriteInHand.transform.localPosition.y - 0.1f);
 			currentWeapon.GetComponent<weapon>().transform.localScale = new Vector3 (1f, 1f, 1f);
 		}
 	}

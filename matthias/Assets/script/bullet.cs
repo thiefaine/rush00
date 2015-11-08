@@ -17,14 +17,22 @@ public class bullet : MonoBehaviour {
 	
 	}
 
+
+
 	void OnTriggerStay2D(Collider2D col)
 	{
-		if (col.gameObject.tag != "weapon" && isShot)
+		if (col.gameObject.tag != "weapon" && col.gameObject.tag != "enemy" && col.gameObject.tag != "room_layout" &&  isShot)
 		{
-			Debug.Log("collision with : " + col.gameObject);
-			Debug.Log("collision with name : " + col.gameObject.name);
+			//Debug.Log("collision with : " + col.gameObject);
+			//Debug.Log("collision with name : " + col.gameObject.name);
 			GameObject.Destroy(this.gameObject);
 		}
+		else if (col.gameObject.tag == "enemy" && GetComponent<Collider2D>().bounds.Contains(col.gameObject.transform.position) && isShot)
+		{
+			col.gameObject.GetComponent<enemy> ().set_dead();
+			GameObject.Destroy(this.gameObject);
+		}
+
 	}
 
 	public float getSpeed()

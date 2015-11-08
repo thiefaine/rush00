@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/enemy/enemy.cs">
+    <Files>
+      <File FileName="Assets/script/hero.cs" Line="71" Column="5" />
+      <File FileName="Assets/script/enemy/enemy.cs" Line="34" Column="2" />
+      <File FileName="Assets/script/backgroundmanager.cs" Line="26" Column="36" />
+      <File FileName="Assets/script/bullet.cs" Line="33" Column="40" />
+      <File FileName="Assets/script/weapon.cs" Line="93" Column="90" />
+      <File FileName="Assets/script/enemy/EnemyManager.cs" Line="21" Column="60" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
